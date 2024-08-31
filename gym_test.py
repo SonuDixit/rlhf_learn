@@ -13,8 +13,12 @@ import logging
 max_time_step = 2000 # https://gymnasium.farama.org/environments/box2d/bipedal_walker/#description
 n_trial = 100
 
+exp_id = 1
+exp_name = 'policy_gradient'
+
+
 logging.basicConfig(level=logging.INFO,  
-                    filename='train.log',  # Logs will be written to this file. If not specified, logs are printed to stderr.  
+                    filename=f'logs/{exp_id}_{exp_name}.log',  # Logs will be written to this file.  
                     filemode='a',  # 'a' for append, 'w' for overwrite  
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')  
 
@@ -123,7 +127,8 @@ def print_policy_net_params():
 
 # Train the policy gradient  
 def train_pg(episodes=1000):
-    # print_policy_net_params()  
+    # print_policy_net_params()
+    logging.info(str(policy_net))  
     for episode in range(episodes):  
         state, _ = env.reset()  
         saved_log_probs = []  
